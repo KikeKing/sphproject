@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-14 21:30:48
- * @LastEditTime: 2020-12-15 20:00:31
+ * @LastEditTime: 2020-12-15 20:17:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\routes\idnex.js
@@ -15,7 +15,7 @@ export default [
     {path: '/home',component: Home},
     {path: '/login',component: Login,meta:{hiddenFooter: true}},
     {path: '/register',component: Register,meta:{hiddenFooter: true}},
-    {path: '/search',component: Search},
+    {name:"search",path: '/search/:keyword?',component: Search},
     {path:'/shopcar',component: ShopCar},
     {path: '/',redirect:'/home'}
 ]

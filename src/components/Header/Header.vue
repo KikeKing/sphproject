@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-15 18:39:52
- * @LastEditTime: 2020-12-15 19:41:59
+ * @LastEditTime: 2020-12-15 20:21:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\components\Header.vue
@@ -16,13 +16,13 @@
                         <p>尚品汇欢迎您！</p>
                         <p>
                             <span>请</span>
-                            <a href="###">登录</a>
-                            <a href="###" class="register">免费注册</a>
+                            <router-link to="/login">登录</router-link>
+                            <router-link to="/register" class="register">免费注册</router-link>
                         </p>
                     </div>
                     <div class="typeList">
                         <a href="###">我的订单</a>
-                        <a href="###">我的购物车</a>
+                        <router-link to="shopcar">我的购物车</router-link>
                         <a href="###">我的尚品汇</a>
                         <a href="###">尚品汇会员</a>
                         <a href="###">企业采购</a>
@@ -35,14 +35,14 @@
             <!--头部第二行 搜索区域-->
             <div class="bottom">
                 <h1 class="logoArea">
-                    <a class="logo" title="尚品汇" href="###" target="_blank">
+                    <router-link class="logo" title="尚品汇" to="/home">
                         <img src="./images/logo.png" alt="">
-                    </a>
+                    </router-link>
                 </h1>
                 <div class="searchArea">
                     <form action="###" class="searchForm">
-                        <input type="text" id="autocomplete" class="input-error input-xxlarge" />
-                        <button class="sui-btn btn-xlarge btn-danger" type="button">搜索</button>
+                        <input type="text" id="autocomplete" class="input-error input-xxlarge" v-model="keyword"/>
+                        <button class="sui-btn btn-xlarge btn-danger" type="button" @click="getSearch">搜索</button>
                     </form>
                 </div>
             </div>
@@ -52,7 +52,23 @@
 
 <script>
 export default {
-    name:"navheader"
+    name:"navheader",
+    data(){
+        return {
+            keyword:""
+        }
+    },
+    methods:{
+        getSearch(){
+            let localtional = {name:"search"};
+            if(this.keyword){
+                localtional.params = {
+                    keyword:this.keyword
+                }
+            }
+            this.$router.push(localtional);
+        }
+    }
 }
 </script>
 

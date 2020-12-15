@@ -1,21 +1,23 @@
 <!--
  * @Author: your name
- * @Date: 2020-12-14 23:30:18
- * @LastEditTime: 2020-12-14 23:31:50
+ * @Date: 2020-12-15 18:33:18
+ * @LastEditTime: 2020-12-15 19:56:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \sph_project\src\pages\test.vue
+ * @FilePath: \sph_project\src\pages\Login\Login.vue
 -->
 <template>
-  <div>test</div>
+  <div>
+      login
+  </div>
 </template>
 
 <script>
 export default {
-    name:"test"
+    name:"login"
 }
 </script>
 
 <style>
-
+  
 </style>

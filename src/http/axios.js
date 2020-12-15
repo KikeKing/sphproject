@@ -12,11 +12,11 @@ const axiosIns=axios.create({
     baseURL: '/api',
     timeout:8000
 });
-axiosIns.intercepts.request.use((config)=>{
+axiosIns.interceptors.request.use((config)=>{
     nprogress.start();
     return config;
 });
-axiosIns.intercepts.response.use((response)=>{
+axiosIns.interceptors.response.use((response)=>{
     nprogress.done();
     return response.data;
 },(error)=>{

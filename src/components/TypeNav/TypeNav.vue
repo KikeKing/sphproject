@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-15 19:06:41
- * @LastEditTime: 2020-12-15 22:15:17
+ * @LastEditTime: 2020-12-16 19:10:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\components\TypeNav\TypeNav.vue
@@ -11,24 +11,25 @@
       <div class="type-nav">
             <div class="container">
                 <div @mouseenter="enterIndex" @mouseleave="leaverIndex">
-                    <h2 class="all">全部商品分类</h2>
-                    <div class="sort">
+                    <h2 class="all" @mouseenter="allShow">全部商品分类</h2>
+                    <transition name="item">
+                        <div class="sort" @click="searchItem" v-show="showSort">
                         <div class="all-sort-list2">
                             <div class="item" :class="{showList:currentIndex===index}" 
                             @mouseenter="showIndex(index)"
                             v-for="(item,index) in categoryList" :key="item.categoryId">
                                 <h3>
-                                    <a href="">{{item.categoryName}}</a>
+                                    <a href="javascript:;" :data-categoryName="item.categoryName" :data-category1Id="item.categoryId">{{item.categoryName}}</a>
                                 </h3>
                                 <div class="item-list clearfix">
                                     <div class="subitem">
                                         <dl class="fore" v-for="(childItem) in item.categoryChild" :key="childItem.categoryId">
                                             <dt>
-                                                <a href="">{{childItem.categoryName}}</a>
+                                                <a href="javascript:;" :data-categoryName="childItem.categoryName" :data-category2Id="childItem.categoryId">{{childItem.categoryName}}</a>
                                             </dt>
                                             <dd>
                                                 <em v-for="(childChildItem) in childItem.categoryChild" :key="childChildItem.categoryId">
-                                                    <a href="">{{childChildItem.categoryName}}</a>
+                                                    <a href="javascript:;" :data-categoryName="childChildItem.categoryName" :data-category3Id="childChildItem.categoryId">{{childChildItem.categoryName}}</a>
                                                 </em>                               
                                             </dd>
                                         </dl>
@@ -36,7 +37,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        </div>
+                    </transition>
                 </div>
                 <nav class="nav">
                     <a href="###">服装城</a>
@@ -60,24 +62,47 @@ export default {
     name:"typeNav",
     data(){
         return {
-            currentIndex:-2
+            currentIndex:-2,
+            showSort:["/","/home"].includes(this.$route.path)
         }
     },
     computed:{
         ...mapState({categoryList(state){return state.home.categoryList}})
     },
     methods: {
+        allShow(){
+            if(!["/","/home"].includes(this.$route.path)){
+                this.showSort=true;
+            }
+        },
         enterIndex(){
             this.currentIndex=-1
         },
         leaverIndex(){
-            this.currentIndex=-2
+            this.currentIndex=-2;
+            if(!["/","/home"].includes(this.$route.path)){
+                this.showSort=false;
+            }
         },
         showIndex:throttle(function(index){
              if(this.currentIndex>-2){
                 this.currentIndex=index
             }
-        },300)
+        },300),
+        searchItem(e){
+            const {categoryname="",category1id="",category2id="",category3id=""}=
+            e.target.dataset;
+            const localtional={name:'search',query: {}};
+            categoryname?localtional.query.categoryName=categoryname:""; 
+            category1id?localtional.query.category1Id=category1id:""; 
+            category2id?localtional.query.category2Id=category2id:""; 
+            category3id?localtional.query.category3Id=category3id:""; 
+            if(Object.keys(this.$route.params).length!==0){
+               localtional.params=this.$route.params;
+            };
+            this.$router.push(localtional);
+            this.showIndex();
+        }
     }
 }
 </script>

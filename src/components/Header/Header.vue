@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-15 18:39:52
- * @LastEditTime: 2020-12-15 20:21:23
+ * @LastEditTime: 2020-12-16 18:14:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\components\Header.vue
@@ -61,6 +61,9 @@ export default {
     methods:{
         getSearch(){
             let localtional = {name:"search"};
+            if(Object.keys(this.$route.query).length!==0){
+                localtional.query=this.$route.query;
+            }
             if(this.keyword){
                 localtional.params = {
                     keyword:this.keyword

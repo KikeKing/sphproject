@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-15 18:32:30
- * @LastEditTime: 2020-12-15 19:48:50
+ * @LastEditTime: 2020-12-16 18:08:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\pages\Home\Home.vue
 -->
 <template>
   <div>
-    <v-nav></v-nav>
+    <TypeNav></TypeNav>
     <v-listContainer></v-listContainer>
     <v-recommend></v-recommend>
     <v-rank></v-rank>
@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import TypeNav from "components/TypeNav/TypeNav";
 import Recommend from "./Recommend/Recommend";
 import Rank from "./Rank/Rank";
 import ListContainer from "./ListContainer/ListContainer";
@@ -29,7 +28,6 @@ import Brand from "./Brand/Brand";
 export default {
     name:"home",
     components:{
-      "v-nav":TypeNav,
       "v-recommend":Recommend,
       "v-rank":Rank,
       "v-listContainer":ListContainer,

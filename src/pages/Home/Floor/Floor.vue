@@ -41,48 +41,32 @@
                   <li>滚筒洗衣机</li>
                   <li>电热水器</li>
                 </ul>
-                <img src="./images/floor-1-1.png" />
+                <img :src="floor.imgUrl"/>
               </div>
               <div class="floorBanner">
-                <div class="swiper-container" id="floor1Swiper">
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                      <img src="./images/floor-1-b01.png">
-                    </div>
-                    <!--<div class="swiper-slide">
-                      <img src="./images/floor-1-b02.png">
-                    </div>
-                    <div class="swiper-slide">
-                      <img src="./images/floor-1-b03.png">
-                    </div>-->
-                  </div>
-                  <!-- 如果需要分页器 -->
-                  <div class="swiper-pagination"></div>
-
-                  <!-- 如果需要导航按钮 -->
-                  <div class="swiper-button-prev"></div>
-                  <div class="swiper-button-next"></div>
-                </div>
+                <SwiperCom :list="floor.carouselList"
+                :loop="true" :autoplay="true"
+                ></SwiperCom>
               </div>
               <div class="split">
                 <span class="floor-x-line"></span>
                 <div class="floor-conver-pit">
-                  <img src="./images/floor-1-2.png" />
+                  <img :src="floor.recommendList[1]" />
                 </div>
                 <div class="floor-conver-pit">
-                  <img src="./images/floor-1-3.png" />
+                  <img :src="floor.recommendList[0]" />
                 </div>
               </div>
               <div class="split center">
-                <img src="./images/floor-1-4.png" />
+                <img :src="floor.bigImg" />
               </div>
               <div class="split">
                 <span class="floor-x-line"></span>
                 <div class="floor-conver-pit">
-                  <img src="./images/floor-1-5.png" />
+                  <img :src="floor.recommendList[3]" />
                 </div>
                 <div class="floor-conver-pit">
-                  <img src="./images/floor-1-6.png" />
+                  <img :src="floor.recommendList[2]" />
                 </div>
               </div>
             </div>
@@ -95,6 +79,10 @@
 <script>
 export default {
   name: 'Floor',
+  props:["floor"],
+  mounted(){
+    console.log(this.floor);
+  }
 }
 </script>
 

@@ -1,13 +1,12 @@
-/*
- * @Author: your name
- * @Date: 2020-12-14 21:22:28
- * @LastEditTime: 2020-12-15 16:13:08
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \sph_project\src\http\index.js
- */
-import apiAxios from './axios';
-import mockAxios from './mock';
-export const getBaseCategoryList = () =>apiAxios.get("/product/getBaseCategoryList")
+import apiAaxios from "./apiAxios"
+import mockAxios from "./mockAxios"
+
+
+//获取三级列表的请求方法
+export const getBaseCategoryList = () => apiAaxios.get("/product/getBaseCategoryList");
+
+//获取轮播图数据
 export const getBanners = () => mockAxios.get("/banners");
-export const getFooters = () => mockAxios.get("/footers");
+//获取楼层数据
+export const getFloors = () => mockAxios.get("/floors");
+

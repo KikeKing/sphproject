@@ -79,10 +79,7 @@
 <script>
 export default {
   name: 'Floor',
-  props:["floor"],
-  mounted(){
-    console.log(this.floor);
-  }
+  props:["floor"]
 }
 </script>
 

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-14 21:30:48
- * @LastEditTime: 2020-12-15 20:17:47
+ * @LastEditTime: 2020-12-18 20:09:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\routes\idnex.js
@@ -15,7 +15,15 @@ export default [
     {path: '/home',component: Home},
     {path: '/login',component: Login,meta:{hiddenFooter: true}},
     {path: '/register',component: Register,meta:{hiddenFooter: true}},
-    {name:"search",path: '/search/:keyword?',component: Search},
+    {name:"search",path: '/search/:keyword?',component: Search,props:route=>(
+        {
+            keyword:route.params.keyword,
+            categoryName:route.query.categoryName,
+            category1Id:route.query.category1Id,
+            category2Id:route.query.category2Id,
+            category3Id:route.query.category3Id
+        }
+    )},
     {path:'/shopcar',component: ShopCar},
     {path: '/',redirect:'/home'}
 ]

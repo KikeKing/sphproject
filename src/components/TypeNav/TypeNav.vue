@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-15 19:06:41
- * @LastEditTime: 2020-12-16 19:10:18
+ * @LastEditTime: 2020-12-18 21:30:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\components\TypeNav\TypeNav.vue
@@ -63,7 +63,8 @@ export default {
     data(){
         return {
             currentIndex:-2,
-            showSort:["/","/home"].includes(this.$route.path)
+            showSort:["/","/home"].includes(this.$route.path),
+            keyword:""
         }
     },
     computed:{
@@ -98,10 +99,23 @@ export default {
             category2id?localtional.query.category2Id=category2id:""; 
             category3id?localtional.query.category3Id=category3id:""; 
             if(Object.keys(this.$route.params).length!==0){
-               localtional.params=this.$route.params;
+                localtional.params=this.$route.params;
+                if(this.keyword===""){
+                    const arr=Object.keys(localtional.params);
+                    if(arr.length===1&&arr[0]==="keyword"){
+                        localtional.params=""
+                    }else{
+                        delete localtional.params.keyword
+                    }
+                }
             };
             this.$router.push(localtional);
             this.showIndex();
+        },
+        mounted(){
+            this.$bus.$on("nokeyword",(val)=>{
+                this.keyword=val;
+            })
         }
     }
 }

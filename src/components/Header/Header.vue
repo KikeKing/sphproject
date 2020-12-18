@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-15 18:39:52
- * @LastEditTime: 2020-12-16 18:14:07
+ * @LastEditTime: 2020-12-18 21:17:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\components\Header.vue
@@ -70,6 +70,18 @@ export default {
                 }
             }
             this.$router.push(localtional);
+        }
+    },
+    mounted(){
+        this.$bus.$on("clearKeyword",(val)=>{
+            this.keyword=val
+        })
+    },
+    watch:{
+        keyword:{
+            handler(){
+                this.$bus.$emit("nokeyword",this.keyword)
+            }
         }
     }
 }

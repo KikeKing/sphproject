@@ -13,44 +13,34 @@
           <ul class="fl sui-tag">
             <li class="with-x" v-if="options.categoryName">{{options.categoryName}}<i @click="cancelCN">×</i></li>
             <li class="with-x" v-if="options.keyword">{{options.keyword}}<i @click="cancelK">×</i></li>
+            <li class="with-x" v-if="options.trademark">{{options.trademark.split(":")[1]}}<i @click="cancelTrademark">×</i></li>
+            <li class="with-x" v-for="(prop,index) in options.props" :key="index">{{prop.split(":")[1]}}<i @click="cancelProps(index)">×</i></li>
           </ul>
         </div>
 
         <!--selector-->
-        <SearchSelector :trademarkList="searchList.trademarkList" :attrsList="searchList.attrsList"/>
+        <SearchSelector @choseTrademark="choseTrademark" @choseAttrsVal="choseAttrsVal"/>
 
         <!--details-->
         <div class="details clearfix">
           <div class="sui-navbar">
             <div class="navbar-inner filter">
               <ul class="sui-nav">
-                <li class="active">
-                  <a href="#">综合</a>
-                </li>
-                <li>
-                  <a href="#">销量</a>
-                </li>
-                <li>
-                  <a href="#">新品</a>
-                </li>
-                <li>
-                  <a href="#">评价</a>
-                </li>
-                <li>
-                  <a href="#">价格⬆</a>
-                </li>
-                <li>
-                  <a href="#">价格⬇</a>
+                <li v-for="orderType in orderTypes" :key="orderType.id" @click="orderFn(`${orderType.id}`)"  :class="{active:orderActive(`${orderType.id}`)}">
+                  <a href="javascript:;">
+                   <span> {{orderType.name}} </span>
+                   <i v-if="orderActive(`${orderType.id}`)" class="iconfont" :class="orderArrow"></i>
+                  </a>
                 </li>
               </ul>
             </div>
           </div>
           <div class="goods-list">
             <ul class="yui3-g">
-              <li class="yui3-u-1-5" v-for="good in searchList.goodsList" :key="good.id">
+              <li class="yui3-u-1-5" v-for="good in searchList.goodsList" :key="good.id" @click="$router.push(`/detail/${good.id}`)">
                 <div class="list-wrap">
                   <div class="p-img">
-                    <a href="javascript:;" target="_blank"
+                    <a href="javascript:;"
                       ><img :src="good.defaultImg"
                     /></a>
                   </div>
@@ -62,7 +52,6 @@
                   </div>
                   <div class="attr">
                     <a
-                      target="_blank"
                       href="javascript:;"
                       :title="good.title"
                       >{{good.title}}</a
@@ -73,12 +62,11 @@
                   </div>
                   <div class="operate">
                     <a
-                      href="success-cart.html"
-                      target="_blank"
+                      href="javascript:;"
                       class="sui-btn btn-bordered btn-danger"
                       >加入购物车</a
                     >
-                    <a href="javascript:void(0);" class="sui-btn btn-bordered"
+                    <a href="javascript:;" class="sui-btn btn-bordered"
                       >收藏</a
                     >
                   </div>
@@ -127,12 +115,26 @@ export default {
         category3Id:"",
         category2Id:"",
         category1Id:"",
-        keyword:""
+        keyword:"",
+        trademark:"",
+        props:[],
+        order:"1:desc"
       },
     };
   },
   computed: {
-    ...mapState({ searchList: (state) => state.search.searchList })
+    ...mapState({ 
+      searchList: (state) => state.search.searchList 
+    }),
+    ...mapState(["orderTypes"]),
+    orderActive(){
+       return (flag)=>{
+            return this.options.order.split(`:`)[0] === flag
+        }
+    },
+    orderArrow(){
+      return this.options.order.split(":")[1]=== "asc" ? `icon-changyongicon-`:`icon-changyongicon_huaban`;
+    }
   },
   methods: {
     ...mapActions(["getSearchData"]),
@@ -141,7 +143,6 @@ export default {
       await this.getSearchData(this.options)
     },
     async sizeChange(index){
-      console.log(index);
       this.options.pageSize=index
       await this.getSearchData(this.options)
     },
@@ -173,7 +174,34 @@ export default {
         hash:`#${Date.now()}`
       })
       this.$bus.$emit("clearKeyword","")
-    }
+    },
+    async choseTrademark({id,name}){
+      if(this.options.trademark.split(":")[0] === id) return;
+      this.options.trademark = `${id}:${name}`;
+      await this.updataCurrentPage(1)
+    },
+    async cancelTrademark(){
+      this.options.trademark='';
+      await this.updataCurrentPage(1)
+    },
+    async choseAttrsVal({id,value,name}){
+      if(this.options.props.includes(`${id}:${value}:${name}`)) return;
+      this.options.props.push(`${id}:${value}:${name}`);
+      this.updataCurrentPage(1);
+    },
+    async cancelProps(index){
+      this.options.props.splice(index,1);
+      await this.updataCurrentPage(1);
+    },
+    async orderFn(id){
+      if(this.options.order.split(":")[0]===id){
+        let flag=this.options.order.split(":")[1]==="asc"? "desc" : "asc";
+        this.options.order=`${id}:${flag}`;
+      }else{
+        this.options.order=`${id}:desc`;
+      }
+      await this.updataCurrentPage(1)
+    } 
   },
   components: {
     SearchSelector,
@@ -184,7 +212,6 @@ export default {
       immediate:true,
       async handler(){
         this.updateOptions();
-        console.log(111);
         await this.updataCurrentPage(1);
       }
     }

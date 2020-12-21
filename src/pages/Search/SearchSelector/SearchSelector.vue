@@ -4,7 +4,7 @@
       <div class="fl key brand">品牌</div>
       <div class="value logos">
         <ul class="logo-list">
-          <li v-for="trademark in trademarkList" :key="trademark.tmId">{{trademark.tmName}}</li>
+          <li v-for="trademark in trademarkList" :key="trademark.tmId" @click="choseTrademark({id:trademark.tmId,name:trademark.tmName})">{{trademark.tmName}}</li>
         </ul>
       </div>
       <div class="ext">
@@ -16,7 +16,7 @@
       <div class="fl key">{{attrs.attrName}}</div>
       <div class="fl value">
         <ul class="type-list">
-          <li v-for="(attrValue,index) in attrs.attrValueList" :key="index">
+          <li v-for="(attrValue,index) in attrs.attrValueList" :key="index" @click="choseAttrsVal({id:attrs.attrId,value:attrValue,name:attrs.attrName})">
             <a>{{attrValue}}</a>
           </li>
         </ul>
@@ -27,9 +27,23 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex';
   export default {
     name: 'SearchSelector',
-    props:["trademarkList","attrsList"]
+    computed: {
+      ...mapState({
+        trademarkList:(state)=> state.search.searchList.trademarkList,
+        attrsList:state=>state.search.searchList.attrsList     
+      })
+    },
+    methods:{
+      choseTrademark({id,name}){
+        this.$emit("choseTrademark",{id,name})
+      },
+      choseAttrsVal({id,value,name}){
+        this.$emit("choseAttrsVal",{id,value,name})
+      }
+    }
   }
 </script>
 
@@ -88,7 +102,7 @@
             color: #e1251b;
             font-style: italic;
             font-size: 14px;
-
+            cursor: pointer;
             img {
               max-width: 100%;
               vertical-align: middle;
@@ -102,7 +116,7 @@
             display: block;
             margin-right: 30px;
             line-height: 26px;
-
+            cursor: pointer;
             a {
               text-decoration: none;
               color: #666;

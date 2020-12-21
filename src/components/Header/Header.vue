@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-15 18:39:52
- * @LastEditTime: 2020-12-18 21:17:03
+ * @LastEditTime: 2020-12-21 20:26:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\components\Header.vue
@@ -69,7 +69,11 @@ export default {
                     keyword:this.keyword
                 }
             }
-            this.$router.push(localtional);
+            if(this.$route.path.toLowerCase().startsWith("/search")){
+                this.$router.replace(localtional);
+            }else{
+                this.$router.push(localtional);
+            }
         }
     },
     mounted(){

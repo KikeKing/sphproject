@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-14 21:30:48
- * @LastEditTime: 2020-12-18 20:09:48
+ * @LastEditTime: 2020-12-21 20:29:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\routes\idnex.js
@@ -11,6 +11,7 @@ import Login from 'pages/Login/Login';
 import Register from 'pages/Register/Register';
 import Search from 'pages/Search/Search';
 import ShopCar from 'pages/ShopCar/ShopCar';
+import Detail from 'pages/Detail';
 export default [
     {path: '/home',component: Home},
     {path: '/login',component: Login,meta:{hiddenFooter: true}},
@@ -24,6 +25,7 @@ export default [
             category3Id:route.query.category3Id
         }
     )},
+    {path:'/detail/:id',component:Detail,props: true},
     {path:'/shopcar',component: ShopCar},
     {path: '/',redirect:'/home'}
 ]

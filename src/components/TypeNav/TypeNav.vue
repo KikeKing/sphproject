@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-15 19:06:41
- * @LastEditTime: 2020-12-18 21:30:28
+ * @LastEditTime: 2020-12-21 20:26:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\components\TypeNav\TypeNav.vue
@@ -109,7 +109,11 @@ export default {
                     }
                 }
             };
-            this.$router.push(localtional);
+            if(this.$route.path.toLowerCase().startsWith("/search")){
+                this.$router.replace(localtional);
+            }else{
+                this.$router.push(localtional);
+            }
             this.showIndex();
         },
         mounted(){

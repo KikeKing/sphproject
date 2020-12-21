@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-16 20:09:48
- * @LastEditTime: 2020-12-18 19:06:00
+ * @LastEditTime: 2020-12-21 20:43:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\http\index.js
@@ -19,3 +19,5 @@ export const getBanners = () => mockAxios.get("/banners");
 export const getFloors = () => mockAxios.get("/floors");
 //获取搜索数据
 export const getSearchData = (options={}) =>apiAaxios.post("/list",options);
+// 获取详情页数据
+export const getDetail = skuId  => apiAaxios.get(`/item/${skuId}`);

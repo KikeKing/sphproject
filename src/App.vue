@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-14 16:08:12
- * @LastEditTime: 2020-12-16 21:12:58
+ * @LastEditTime: 2020-12-22 18:55:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\App.vue
@@ -38,5 +38,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
+    
 </style>

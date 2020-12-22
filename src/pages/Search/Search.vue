@@ -128,9 +128,9 @@ export default {
     }),
     ...mapState(["orderTypes"]),
     orderActive(){
-       return (flag)=>{
-            return this.options.order.split(`:`)[0] === flag
-        }
+      return (flag)=>{
+        return this.options.order.split(`:`)[0] === flag;
+      }
     },
     orderArrow(){
       return this.options.order.split(":")[1]=== "asc" ? `icon-changyongicon-`:`icon-changyongicon_huaban`;

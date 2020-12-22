@@ -329,6 +329,7 @@
 </template>
 
 <script>
+
   import ImageList from './ImageList/ImageList'
   import Zoom from './Zoom/Zoom'
   import {mapActions,mapState} from 'vuex'
@@ -511,6 +512,7 @@
                   border-right: 1px solid #bbb;
                   border-bottom: 1px solid #bbb;
                   border-left: 1px solid #eee;
+                  cursor: pointer;
 
                   &.active {
                     color: green;

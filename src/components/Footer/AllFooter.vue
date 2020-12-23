@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-15 19:51:33
- * @LastEditTime: 2020-12-16 08:37:17
+ * @LastEditTime: 2020-12-23 19:30:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\components\Footer\AllFooter.vue

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-15 18:39:52
- * @LastEditTime: 2020-12-21 20:26:35
+ * @LastEditTime: 2020-12-23 21:25:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\components\Header.vue
@@ -12,7 +12,14 @@
             <!-- 头部的第一行 -->
             <div class="top">
                 <div class="container">
-                    <div class="loginList">
+                    <div class="loginList" v-if="userInfo">
+                        <p>尚品汇欢迎您！</p>
+                         <p>
+                            <span>{{userInfo.nickName}} </span>
+                            <a href="javascript:;" @click="logoutFn">退出登录</a>
+                        </p>
+                    </div>
+                    <div class="loginList" v-else-if="!userInfo">
                         <p>尚品汇欢迎您！</p>
                         <p>
                             <span>请</span>
@@ -51,14 +58,17 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex';
 export default {
     name:"navheader",
     data(){
         return {
-            keyword:""
+            keyword:"",
+            userInfo:""
         }
     },
     methods:{
+        ...mapActions(["logout"]),
         getSearch(){
             let localtional = {name:"search"};
             if(Object.keys(this.$route.query).length!==0){
@@ -74,9 +84,17 @@ export default {
             }else{
                 this.$router.push(localtional);
             }
+        },
+        async logoutFn(){
+           const code = await this.logout();
+           if(code===200){
+               window.localStorage.removeItem("userInfo");
+               this.userInfo="";
+           }
         }
     },
     mounted(){
+        this.userInfo=JSON.parse(window.localStorage.getItem("userInfo"));
         this.$bus.$on("clearKeyword",(val)=>{
             this.keyword=val
         })

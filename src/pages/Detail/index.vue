@@ -73,12 +73,12 @@
             </div>
             <div class="cartWrap">
               <div class="controls">
-                <input autocomplete="off" class="itxt">
-                <a href="javascript:" class="plus">+</a>
-                <a href="javascript:" class="mins">-</a>
+                <input autocomplete="off" class="itxt" :value="skuNum" @input="updateSkuNum">
+                <a href="javascript:" class="plus" @click="skuNum++">+</a>
+                <a href="javascript:" class="mins" @click="skuNum>1&&skuNum--">-</a>
               </div>
               <div class="add">
-                <a href="javascript:">加入购物车</a>
+                <a href="javascript:" @click="addCart">加入购物车</a>
               </div>
             </div>
           </div>
@@ -332,16 +332,17 @@
 
   import ImageList from './ImageList/ImageList'
   import Zoom from './Zoom/Zoom'
-  import {mapActions,mapState} from 'vuex'
+  import {mapActions,mapState,mapGetters} from 'vuex'
   export default {
     name: 'Detail',
     props:["id"],
     data(){
       return {
-        currentIndex:0
+          skuNum:1
       }
     },
     computed:{
+      ...mapGetters(["checkedAttrs"]),
       ...mapState({detailList:state=>state.detail.detailList})
     },
     components: {
@@ -349,7 +350,26 @@
       Zoom
     },
     methods:{
-      ...mapActions(["getDetail","activeFn"])
+      ...mapActions(["getDetail","activeFn","addToCart"]),
+      async addCart(){
+       try {
+          const code = await this.addToCart({skuId:this.id,skuNum:this.skuNum});
+          console.log(code);
+          if(code===200) {
+            window.sessionStorage.setItem("sph_skuInfo",JSON.stringify(this.detailList.skuInfo));
+            this.$router.push(`/addCartSuccess?skuNum=${this.skuNum}`)
+          }else{
+            alert("添加失败")
+          }
+       } catch (error) {
+          alert("您的网络貌似出现了一点问题......")
+       }
+      },
+      updateSkuNum(e){
+        let val=e.target.value;
+        let reg=/\D+/g;
+        this.skuNum=e.target.value=val.replace(reg,"");
+      }
     },
     async created(){
       await this.getDetail(this.id);

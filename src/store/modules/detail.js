@@ -1,18 +1,30 @@
 /*
  * @Author: your name
  * @Date: 2020-12-21 20:37:14
- * @LastEditTime: 2020-12-22 00:40:01
+ * @LastEditTime: 2020-12-22 19:50:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\store\modules\detail.js
  */
-import {getDetail} from 'http'
+import {getDetail} from 'http';
 const OK=200;
 export default {
     state:{
         detailList:""
     },
-    getters:{},
+    getters:{
+        checkedAttrs(state){
+            let goodsList=[];
+            state.detailList.spuSaleAttrList.forEach((attr)=>{
+                attr.spuSaleAttrValueList.forEach(value =>{
+                    if(val.isChecked===1){
+                        goodsList.push(val)
+                    }
+                })
+            })
+            return goodsList
+        }
+    },
     mutations:{
         getDetail(state,data){
             state.detailList=data
@@ -37,6 +49,6 @@ export default {
         },
         activeFn({commit},{attrIndex,valueIndex}){
             commit("activeFn",{attrIndex,valueIndex})
-        }
+        }     
     }
 }

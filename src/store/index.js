@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-15 10:08:55
- * @LastEditTime: 2020-12-21 20:48:51
+ * @LastEditTime: 2020-12-22 21:12:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\store\index.js
@@ -15,6 +15,8 @@ import actions from './actions';
 import home from './modules/home';
 import search from './modules/search';
 import detail from './modules/detail';
+import cart from './modules/cart';
+import user from './modules/user';
 Vue.use(Vuex);
 export default new Vuex.Store({
     state,
@@ -24,6 +26,8 @@ export default new Vuex.Store({
     modules:{
         home,
         search,
-        detail
+        detail,
+        cart,
+        user
     }
 })

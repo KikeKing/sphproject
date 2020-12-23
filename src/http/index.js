@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-16 20:09:48
- * @LastEditTime: 2020-12-21 20:43:18
+ * @LastEditTime: 2020-12-23 11:49:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\http\index.js
@@ -21,3 +21,11 @@ export const getFloors = () => mockAxios.get("/floors");
 export const getSearchData = (options={}) =>apiAaxios.post("/list",options);
 // 获取详情页数据
 export const getDetail = skuId  => apiAaxios.get(`/item/${skuId}`);
+//添加商品到购物车
+export const addToCart = (skuId, skuNum) => apiAaxios.post(`/cart/addToCart/${skuId}/${skuNum}`);
+//获取购物车列表
+export const getCartList = () => apiAaxios.get('/cart/cartList');
+//更新复选框选中状态
+export const updateChecked = ({skuID,isChecked}) => apiAaxios.get(`/cart/checkCart/${skuID}/${isChecked}`);
+//删除购物车商品
+export const deleteCart = skuId => apiAaxios.delete(`cart/deleteCart/${skuId}`);

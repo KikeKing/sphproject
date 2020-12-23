@@ -16,6 +16,7 @@
     "less-loader": "^7.1.0",
     "nprogress": "^0.2.0",
     "swiper": "^6.4.1",
+    "uuid": "^8.3.2",
     "vue": "^2.6.11",
     "vue-piczoom": "^1.0.6",
     "vue-router": "^3.4.9",

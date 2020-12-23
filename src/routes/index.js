@@ -1,17 +1,18 @@
 /*
  * @Author: your name
  * @Date: 2020-12-14 21:30:48
- * @LastEditTime: 2020-12-21 20:29:46
+ * @LastEditTime: 2020-12-23 15:13:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\routes\idnex.js
 */
-import Home from 'pages/Home/Home';
-import Login from 'pages/Login/Login';
-import Register from 'pages/Register/Register';
-import Search from 'pages/Search/Search';
-import ShopCar from 'pages/ShopCar/ShopCar';
-import Detail from 'pages/Detail';
+const Home = ()=>import(/*webpackChunkName:"Home"*/'pages/Home/Home')
+const Login = ()=>import(/*webpackChunkName:"Login"*/'pages/Login/Login')
+const Register = ()=>import(/*webpackChunkName:"Register"*/'pages/Register/Register')
+const Search = ()=>import(/*webpackChunkName:"Search"*/'pages/Search/Search')
+const ShopCart = ()=>import(/*webpackChunkName:"ShopCart"*/'pages/ShopCart')
+const Detail = ()=>import(/*webpackChunkName:"Detail"*/'pages/Detail')
+const AddCartSuccess = ()=>import(/*webpackChunkName:"AddCartSuccess"*/'pages/AddCartSuccess')
 export default [
     {path: '/home',component: Home},
     {path: '/login',component: Login,meta:{hiddenFooter: true}},
@@ -26,6 +27,9 @@ export default [
         }
     )},
     {path:'/detail/:id',component:Detail,props: true},
-    {path:'/shopcar',component: ShopCar},
+    {path:'/addCartSuccess',component:AddCartSuccess,props:route=>(
+        {skuNum:route.query.skuNum}
+    )},
+    {path:'/shopcart',component: ShopCart},
     {path: '/',redirect:'/home'}
 ]

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-14 21:30:48
- * @LastEditTime: 2020-12-23 19:21:28
+ * @LastEditTime: 2020-12-24 15:45:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\routes\idnex.js
@@ -13,10 +13,12 @@ const Search = ()=>import(/*webpackChunkName:"Search"*/'pages/Search/Search')
 const ShopCart = ()=>import(/*webpackChunkName:"ShopCart"*/'pages/ShopCart')
 const Detail = ()=>import(/*webpackChunkName:"Detail"*/'pages/Detail')
 const AddCartSuccess = ()=>import(/*webpackChunkName:"AddCartSuccess"*/'pages/AddCartSuccess')
+const RegisterSuccess= ()=>import(/*webpackChunkName:"RegisterSuccess"*/'pages/RegisterSuccess')
 export default [
     {path: '/home',component: Home},
     {path: '/login',component: Login,meta:{hiddenFooter: true}},
     {path: '/register',component: Register,meta:{hiddenFooter: true}},
+    {path:'/registersuccess',component:RegisterSuccess,meta:{hiddenFooter: true}},
     {name:"search",path: '/search/:keyword?',component: Search,props:route=>(
         {
             keyword:route.params.keyword,

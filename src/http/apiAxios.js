@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-16 20:09:48
- * @LastEditTime: 2020-12-22 21:13:11
+ * @LastEditTime: 2020-12-25 19:24:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\http\apiAxios.js
@@ -19,6 +19,10 @@ axiosIns.interceptors.request.use(function (config) {
     //发送请求前
     nprogress.start()
     config.headers.userTempId=store.state.user.uuid
+    const token = window.localStorage.getItem('sph_token')
+    if(token){
+        config.headers.token=token
+    }
     return config;
 });
 

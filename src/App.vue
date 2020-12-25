@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-14 16:08:12
- * @LastEditTime: 2020-12-22 18:55:30
+ * @LastEditTime: 2020-12-25 19:25:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\App.vue
@@ -28,12 +28,18 @@ export default {
     "v-allFooter":AllFooter
   },
   methods:{
-    ...mapActions(["getBaseCategoryList","getBanners","getFloors"])
+    ...mapActions(["getBaseCategoryList","getBanners","getFloors","autoLogin","logout"])
   },
   async created(){
     await this.getBaseCategoryList();
     await this.getBanners();
-    await this.getFloors()
+    await this.getFloors();
+  },
+  async mounted(){
+    const code = await this.autoLogin();
+    if(code!==200){
+      await this.logout();
+    }
   }
 }
 </script>

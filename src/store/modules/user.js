@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-22 21:08:24
- * @LastEditTime: 2020-12-23 21:20:07
+ * @LastEditTime: 2020-12-25 19:25:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\store\modules\user.js
@@ -22,16 +22,36 @@ export default {
     },
     actions:{
         async login(store,{phone,password}){
-            const {code,data}= await login(phone,password);
+            const {code,data,message}= await login(phone,password);
             if(code===OK){
+                window.localStorage.setItem('sph_token',data.token);
                 store.commit('login',data);
             }
-            return code
+            return {code,message};
         },
         async logout(store){
             const {code} =await logout();
             if(code===OK){
+                window.localStorage.removeItem('sph_token')
+                store.commit('login',{})
+            }
+            return code
+        },
+        async register (store,{phone,password,registercode}){
+            const {code} = await register(phone,password,registercode);
+            return code
+        },
+        async autoLogin({commit}){
+            try {
+                //检验token是否合法
+                const {code,data} = await autoLogin();
+                if(code===OK){
+                    //提交mutation 修改仓库数据
+                    commit("login",data)
+                }
                 return code
+            }catch (e) {
+                throw new Error(e)
             }
         }
     }

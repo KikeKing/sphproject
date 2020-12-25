@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-15 18:39:52
- * @LastEditTime: 2020-12-23 21:25:11
+ * @LastEditTime: 2020-12-25 18:05:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\components\Header.vue
@@ -12,14 +12,14 @@
             <!-- 头部的第一行 -->
             <div class="top">
                 <div class="container">
-                    <div class="loginList" v-if="userInfo">
+                    <div class="loginList" v-if="userInfo.name">
                         <p>尚品汇欢迎您！</p>
                          <p>
                             <span>{{userInfo.nickName}} </span>
                             <a href="javascript:;" @click="logoutFn">退出登录</a>
                         </p>
                     </div>
-                    <div class="loginList" v-else-if="!userInfo">
+                    <div class="loginList" v-else>
                         <p>尚品汇欢迎您！</p>
                         <p>
                             <span>请</span>
@@ -58,14 +58,16 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex';
+import {mapActions,mapState} from 'vuex';
 export default {
     name:"navheader",
     data(){
         return {
-            keyword:"",
-            userInfo:""
+            keyword:""
         }
+    },
+    computed:{
+        ...mapState({userInfo:state=>state.user.userInfo})
     },
     methods:{
         ...mapActions(["logout"]),
@@ -87,14 +89,12 @@ export default {
         },
         async logoutFn(){
            const code = await this.logout();
-           if(code===200){
-               window.localStorage.removeItem("userInfo");
-               this.userInfo="";
+           if(code === 200){
+               this.$router.replace('/home')
            }
         }
     },
     mounted(){
-        this.userInfo=JSON.parse(window.localStorage.getItem("userInfo"));
         this.$bus.$on("clearKeyword",(val)=>{
             this.keyword=val
         })

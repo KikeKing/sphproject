@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-16 20:09:48
- * @LastEditTime: 2020-12-23 20:29:45
+ * @LastEditTime: 2020-12-25 19:10:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\http\index.js
@@ -36,5 +36,5 @@ export const logout = () => apiAaxios.get(`/user/passport/logout`);
 //自动登录
 export const autoLogin = () => apiAaxios.get(`/user/passport/auth/getUserInfo`);
 //注册
-export const register = (phone,password,code,nickName) => apiAaxios.post(`/user/passport/register`,{phone,password,code,nickName});
+export const register = (phone,password,code) => apiAaxios.post(`/user/passport/register`,{phone,password,code});
 

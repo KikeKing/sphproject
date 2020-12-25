@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-14 16:08:12
- * @LastEditTime: 2020-12-23 11:42:24
+ * @LastEditTime: 2020-12-24 16:25:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\main.js
@@ -14,6 +14,7 @@ import 'common/less/transition.less'
 import 'mock/mock'
 import 'util/components'
 import 'util/element'
+import 'util/vee'
 Vue.config.productionTip = false
 Vue.prototype.$bus=new Vue();
 new Vue({

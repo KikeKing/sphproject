@@ -21,7 +21,7 @@
               </div>
               <div class="input-text clearFix">
                 <span class="pwd"></span>
-                <input type="text" placeholder="请输入密码" v-model="password">
+                <input type="password" placeholder="请输入密码" v-model="password">
               </div>
               <div class="setting clearFix">
                 <label class="checkbox inline">
@@ -30,7 +30,7 @@
                 </label>
                 <span class="forget">忘记密码？</span>
               </div>
-              <button class="btn" @click="loginFn(phone,password)">登&nbsp;&nbsp;录</button>
+              <button class="btn" @click="loginFn" type="button">登&nbsp;&nbsp;录</button>
             </form>
 
             <div class="call clearFix">
@@ -50,6 +50,7 @@
 </template>
 
 <script>
+  let flag=true;
   import {mapActions,mapState} from 'vuex';
   export default {
     name: 'Login',
@@ -64,11 +65,16 @@
     },
     methods:{
       ...mapActions(["login"]),
-      async loginFn(phone,password){
-        let code = await this.login({phone,password});
+      async loginFn(){
+        let {code,message} = await this.login({phone:this.phone,password:this.password});
         if(code===200){
-          window.localStorage.setItem("userInfo",JSON.stringify(this.userInfo));
-          this.$router.push('/home')
+          this.$message("登录成功")
+          this.$router.replace('/home')
+        }else{
+          this.$message({
+            message,
+            type: 'error'
+          })
         }
       }
     }

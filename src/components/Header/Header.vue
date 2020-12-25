@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-15 18:39:52
- * @LastEditTime: 2020-12-25 18:05:39
+ * @LastEditTime: 2020-12-25 21:07:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\components\Header.vue
@@ -28,8 +28,8 @@
                         </p>
                     </div>
                     <div class="typeList">
-                        <a href="###">我的订单</a>
-                        <router-link to="shopcar">我的购物车</router-link>
+                        <router-link to="center">我的订单</router-link>
+                        <router-link to="shopcart">我的购物车</router-link>
                         <a href="###">我的尚品汇</a>
                         <a href="###">尚品汇会员</a>
                         <a href="###">企业采购</a>
@@ -89,6 +89,7 @@ export default {
         },
         async logoutFn(){
            const code = await this.logout();
+           console.log(code);
            if(code === 200){
                this.$router.replace('/home')
            }

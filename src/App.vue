@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-14 16:08:12
- * @LastEditTime: 2020-12-25 19:25:16
+ * @LastEditTime: 2020-12-25 20:53:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\App.vue
@@ -34,12 +34,6 @@ export default {
     await this.getBaseCategoryList();
     await this.getBanners();
     await this.getFloors();
-  },
-  async mounted(){
-    const code = await this.autoLogin();
-    if(code!==200){
-      await this.logout();
-    }
   }
 }
 </script>

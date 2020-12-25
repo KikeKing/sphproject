@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-14 20:57:46
- * @LastEditTime: 2020-12-22 20:56:17
+ * @LastEditTime: 2020-12-25 20:50:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\vue.config.js
@@ -36,6 +36,7 @@ module.exports = {
                 "store":resolve("src/store"),
                 "common":resolve("src/common"),
                 "util":resolve("src/util"),
+                "config":resolve("src/config"),
             }
         }
     },

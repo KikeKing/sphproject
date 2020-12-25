@@ -30,6 +30,16 @@
         skuInfo:""
       }
     },
+    async beforeRouteEnter(to,from,next){
+        let skuNum = to.query.skuNum;
+        console.log(to);
+        let skuInfo = JSON.parse(window.sessionStorage.getItem("sph_skuInfo"));
+        if(skuNum&&skuInfo){
+          next()
+        }else{
+          next("/search")
+        }
+    },
     mounted(){
       this.skuInfo = JSON.parse(window.sessionStorage.getItem("sph_skuInfo"));
     }

@@ -41,7 +41,7 @@
                 <div class="list-wrap">
                   <div class="p-img">
                     <a href="javascript:;"
-                      ><img :src="good.defaultImg"
+                      ><img v-lazy="good.defaultImg"
                     /></a>
                   </div>
                   <div class="price">
@@ -79,7 +79,7 @@
             @size-change="sizeChange"
             @current-change="updataCurrentPage"
             :current-page="options.pageNo"
-            :page-sizes="[2, 3, 4, 5]"
+            :page-sizes="[10, 20, 50, 100]"
             :page-size="options.pageSize"
             layout="total, sizes, prev, pager, next, jumper"
             :total="searchList.total"
@@ -109,7 +109,7 @@ export default {
   data() {
     return {
       options: {
-        pageSize:5,
+        pageSize:10,
         pageNo:1,
         categoryName:"",
         category3Id:"",

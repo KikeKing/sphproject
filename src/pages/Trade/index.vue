@@ -118,7 +118,7 @@
               //给个失败的提示
               this.$message("提交失败")
               //回到购物车界面
-              // this.$router.replace("/ShopCart")
+              this.$router.replace("/ShopCart")
           }
         } catch (error) {
           this.$alert("网络错误")

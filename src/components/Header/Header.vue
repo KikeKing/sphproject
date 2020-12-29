@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-15 18:39:52
- * @LastEditTime: 2020-12-25 21:07:42
+ * @LastEditTime: 2020-12-29 19:38:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\components\Header.vue
@@ -157,7 +157,7 @@ export default {
             width: 1200px;
             margin: 0 auto;
             overflow: hidden;
-
+            position: relative;
             .logoArea {
                 float: left;
 
@@ -168,7 +168,11 @@ export default {
                     }
                 }
             }
-
+            .welcome{
+                position: absolute;
+                left: 500px;
+                top: 30px;
+            }
             .searchArea {
                 float: right;
                 margin-top: 35px;

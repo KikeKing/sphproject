@@ -24,10 +24,6 @@
                 <input type="password" placeholder="请输入密码" v-model="password">
               </div>
               <div class="setting clearFix">
-                <label class="checkbox inline">
-                  <input name="m1" type="checkbox" value="2" checked="">
-                  自动登录
-                </label>
                 <span class="forget">忘记密码？</span>
               </div>
               <button class="btn" @click="loginFn" type="button">登&nbsp;&nbsp;录</button>

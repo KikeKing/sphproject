@@ -64,6 +64,7 @@
                     <a
                       href="javascript:;"
                       class="sui-btn btn-bordered btn-danger"
+                      @click="addCartFn(good.id)"
                       >加入购物车</a
                     >
                     <a href="javascript:;" class="sui-btn btn-bordered"
@@ -126,6 +127,7 @@ export default {
     ...mapState({ 
       searchList: (state) => state.search.searchList 
     }),
+    ...mapState({detailList:state=>state.detail.detailList}),
     ...mapState(["orderTypes"]),
     orderActive(){
       return (flag)=>{
@@ -137,7 +139,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["getSearchData"]),
+    ...mapActions(["getSearchData","addToCart"]),
     async updataCurrentPage(index){
       this.options.pageNo=index
       await this.getSearchData(this.options)
@@ -201,6 +203,12 @@ export default {
         this.options.order=`${id}:desc`;
       }
       await this.updataCurrentPage(1)
+    },
+    async addCartFn(id){
+      const code = await this.addToCart({skuId:id,skuNum:"1"})
+      if(code===200){
+        this.$router.push('/shopcart')
+      }
     } 
   },
   components: {

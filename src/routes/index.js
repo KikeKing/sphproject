@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-14 21:30:48
- * @LastEditTime: 2020-12-25 22:19:33
+ * @LastEditTime: 2020-12-29 15:04:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\src\routes\idnex.js
@@ -19,7 +19,7 @@ const Trade = ()=>import(/*webpackChunkName:"Trade"*/'pages/Trade')
 const Center = ()=>import(/*webpackChunkName:"Center"*/'pages/Center')
 const Pay = ()=>import(/*webpackChunkName:"Pay"*/'pages/Pay')
 const PaySuccess = ()=>import(/*webpackChunkName:"PaySuccess"*/'pages/PaySuccess')
-
+const Myorder = ()=>import(/*webpackChunkName:"Myorder"*/'pages/Center/Myorder')
 export default [
     {path: '/home',component: Home},
     {
@@ -87,6 +87,12 @@ export default [
             }
         }
     },
-    {path:'/center',component: Center},
+    {
+        path:'/center',
+        component: Center,
+        children: [
+            {path:'myorder', component:Myorder}
+        ]
+    },
     {path: '/',redirect:'/home'}
 ]

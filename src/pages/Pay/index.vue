@@ -7,8 +7,8 @@
           <span class="success-info">订单提交成功，请您及时付款，以便尽快为您发货~~</span>
         </h4>
         <div class="paymark">
-          <span class="fl">请您在提交订单<em class="orange time">4小时</em>之内完成支付，超时订单会自动取消。订单号：<em>145687</em></span>
-          <span class="fr"><em class="lead">应付金额：</em><em class="orange money">￥17,654</em></span>
+          <span class="fl">请您在提交订单<em class="orange time">4小时</em>之内完成支付，超时订单会自动取消。订单号：<em>{{payInfo.orderId}}</em></span>
+          <span class="fr"><em class="lead">应付金额：</em><em class="orange money">￥ {{payInfo.totalFee}}</em></span>
         </div>
       </div>
       <div class="checkout-info">
@@ -65,7 +65,7 @@
         <div class="hr"></div>
 
         <div class="submit">
-          <router-link class="btn" to="/paysuccess">立即支付</router-link>
+          <a class="btn" href="javascript:;" @click="payFn">立即支付</a>
         </div>
         <div class="otherpay">
           <div class="step-tit">
@@ -82,8 +82,48 @@
 </template>
 
 <script>
+  import QRCode from 'qrcode'
+  import {mapState,mapActions} from 'vuex'
   export default {
     name: 'Pay',
+    computed: {
+      ...mapState({payInfo:state=>state.order.payInfo})
+    },
+    methods:{
+      ...mapActions(["getOrderPay","queryPayStatus","deleteCheckedCart"]),
+      async payFn(){
+        const url=await QRCode.toDataURL(this.payInfo.codeUrl);
+        this.$alert(`<img src="${url}">`,`请支付￥${this.payInfo.totalFee}`,{
+          dangerouslyUseHTMLString:true,
+          showCancelButton:true,
+          center:true,
+          cancelButtonText:"取消支付",
+          showConfirmButton:false,
+          showClose:false, //隐藏右上角的X
+          roundButton:true,
+          customClass:"small",
+          callback: function(action){
+            if(action === "cancel"){
+              clearInterval(timer)
+            }
+          }
+        })
+        const timer = setInterval(async ()=>{
+          const code=await this.queryPayStatus(this.payInfo.orderId);
+          console.log(code);
+          if(code===200){
+            this.$msgbox.close();
+            clearInterval(timer);
+            this.$router.replace('/paysuccess')
+            await this.deleteCheckedCart();
+            this.$message("支付成功")
+          }
+        },1000)
+      }
+    },
+    async mounted(){
+      await this.getOrderPay(this.$route.query.orderid)
+    }
   }
 </script>
 

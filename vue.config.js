@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-14 20:57:46
- * @LastEditTime: 2020-12-15 16:01:39
+ * @LastEditTime: 2020-12-30 11:19:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \sph_project\vue.config.js
@@ -28,7 +28,7 @@ module.exports = {
         resolve:{
             alias:{
                 "http":resolve("src/http"),
-                "component":resolve("src/component"),
+                "components":resolve("src/components"),
                 "mock":resolve("src/mock"),
                 "pages":resolve("src/pages"),
                 "router":resolve("src/router"),
